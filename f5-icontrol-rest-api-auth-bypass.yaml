@@ -1,0 +1,21 @@
+id: f5-icontrol-rest-api-auth-bypass
+
+info:
+  name: F5 iControl REST API Auth Bypass
+  author: numanturle
+  severity: high
+  reference:
+    - https://twitter.com/1ZRR4H/status/1522150111429726209
+  tags: rce
+
+requests:
+  - method: GET
+    redirects: true
+    path:
+      - '{{BaseURL}}/mgmt/shared/authn/login'
+    matchers:
+      - type: word
+        words:
+          - "resterrorresponse"
+          - "Authorization failed"
+        condition: and
